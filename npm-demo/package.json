@@ -1,0 +1,15 @@
+{
+  "name": "npm-demo",
+  "version": "1.0.0",
+  "description": "This is first node project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Razdan",
+  "license": "ISC",
+  "dependencies": {
+    "mongoo": "^0.3.5",
+    "underscore": "^1.9.1"
+  }
+}

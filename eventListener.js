@@ -1,8 +1,18 @@
 const EventEmitter = require('events');
-var emitter = new EventEmitter();
 
-emitter.on('MessageLogged',function(){
-	console.log('Testing')
-});
+class MyEventListener extends EventEmitter{
 
-emitter.emit('MessageLogged');
+    init () {
+		this.on('MessageLogged', (eventArg) => {
+		console.log(eventArg);
+		console.log(`Testing ${eventArg.url}`);
+		});
+
+		this.on('loggedMessage', (eventArg) => {
+		console.log(eventArg);
+		console.log(`Logged :  ${eventArg.message}`);
+		});
+	}
+}
+
+module.exports = MyEventListener;

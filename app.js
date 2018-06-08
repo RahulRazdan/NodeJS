@@ -1,8 +1,12 @@
 const path = require('path');
 const os = require('os');
 const logger = require('./logger');
-const fs = require('fs');
+const MyEventListener = require('./eventListener');
+const listener = new MyEventListener();
 
+listener.init();
+
+const fs = require('fs');
 console.log(logger);
 
 function sayHi(name){
@@ -29,3 +33,5 @@ fs.readdir('./',function(err,files){
 	else
 		console.log('Results ',files);
 });
+
+listener.emit('loggedMessage',{ message : 'This is a testing message'});
