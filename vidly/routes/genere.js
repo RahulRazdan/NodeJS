@@ -40,7 +40,7 @@ router.delete('/:id',(request,response) =>{
     if(!genere)
         return response.status(404).send('Could not find the genere, please use add service');
 
-    let index = generes.indexOf(genere);
+    let index = generes.indexOf(genere);    
     generes.splice(index,1);
     response.send(genere);
 });

@@ -73,7 +73,7 @@ app.get('/',(request,response)=> {
     //response.send('Welcome to Vidly!!');
 });
 
-app.get('/api/generes',(request,response)=>{
+app.get('/',(request,response)=>{
     response.send(generes);
 });
 
