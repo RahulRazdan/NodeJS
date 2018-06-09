@@ -1,0 +1,6 @@
+{
+    "name" : "this is default vidly PRODUCTION application",
+    "mail" : {
+        "host" : "prod-mail-server"
+    }
+}

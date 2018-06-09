@@ -1,0 +1,6 @@
+{
+    "name" : "this is default vidly DEVELOPMENT application",
+    "mail" : {
+        "host" : "dev-mail-server"
+    }
+}
