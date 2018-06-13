@@ -3,7 +3,8 @@ const config = require('config');
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const express = require('express');
-const {User,validate,validatePassword} = require('../models/User');
+const {User,validatePassword} = require('../models/User');
+const Joi = require('joi');
 const router = express.Router();
 
 router.post('/',async (request,response) => {
@@ -19,19 +20,24 @@ router.post('/',async (request,response) => {
 
     let user = await User.findOne({ email : request.body.email});
 
-    if(user)
-        return response.status(400).send('User is already registered!!');
+    if(!user)
+        return response.status(400).send('Incorrect email or password');
 
-    user = new User(_.pick(request.body,['name','email','password']));
-
-    const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.password,salt);
-
-    await user.save();
-
+    const match = await bcrypt.compare(request.body.password,user.password);
+    
+    if(!match)
+        return response.status(400).send('Login Failed !!');
+    
     const token = user.generateAuthToken();
-
-    response.header('x-auth-token',token).send(_.pick(user,['id','name','email']));
+    response.send(token);
 });
 
+function validate(user){
+    const schema = {
+        email : Joi.string().max(255).required().email(),
+        password : Joi.string().max(255).required()
+    };   
+
+    return Joi.validate(user,schema);
+}
 module.exports = router;
