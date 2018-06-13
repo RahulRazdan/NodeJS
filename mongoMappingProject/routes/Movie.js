@@ -20,7 +20,6 @@ router.post('/',(request,response)=>{
 async function createMovie(request,response){
     
     try{
-
         let genre = await Genre.findById(request.genreId);
         if(!genre)
             return response.status(400).send('Invalid GENRE...');

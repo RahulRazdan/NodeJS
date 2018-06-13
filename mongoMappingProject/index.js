@@ -3,6 +3,11 @@ const express = require('express');
 const {movieSchema} = require('./models/Movie')
 const movie = require('./routes/Movie')
 const genre = require('./routes/Genre')
+const rental = require('./routes/Rental')
+const user = require('./routes/User')
+
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
 const app = express();
 
@@ -13,6 +18,8 @@ mongo.connect('mongodb://localhost/playground')
 app.use(express.json());
 app.use('/api/movies',movie);
 app.use('/api/genres',genre);
+app.use('/api/rentals',rental);
+app.use('/api/users',user);
 
 var port = process.env.PORT || 3000
 

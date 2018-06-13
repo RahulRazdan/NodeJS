@@ -28,7 +28,7 @@ const movieSchema = new mongo.Schema({
     }
 });
 
-const Movie = mongo.model('Customer',movieSchema);
+const Movie = mongo.model('Movie',movieSchema);
 
 function validateMovies(movie){
     const schema = {
@@ -41,5 +41,6 @@ function validateMovies(movie){
     return Joi.validate(movie,schema);
 }
 
+exports.movieSchema = movieSchema;
 exports.Movie = Movie;
 exports.validate = validateMovies;
