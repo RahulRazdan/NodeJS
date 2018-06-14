@@ -34,11 +34,14 @@ const userSchema = new mongo.Schema({
         required : true,
         trim : true,
         max : 1024
-    }
+    },
+    isAdmin : Boolean
    });
 
 userSchema.methods.generateAuthToken = function(){
-    return jwt.sign({ _id : this._id},config.get('jwtPrivateKey'));
+    console.log('creating token');
+    const token =  jwt.sign({ _id : this._id , isAdmin : this.isAdmin},config.get('jwtPrivateKey'));
+    return token;
 }
 const User = mongo.model('User',userSchema);
 

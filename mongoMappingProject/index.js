@@ -1,7 +1,8 @@
+require('express-async-errors');
+const myerror = require('./middleaware/error');
 const mongo = require('mongoose');
 const express = require('express');
 const config = require('config');
-const {movieSchema} = require('./models/Movie')
 const movie = require('./routes/Movie')
 const genre = require('./routes/Genre')
 const rental = require('./routes/Rental')
@@ -28,6 +29,7 @@ app.use('/api/genres',genre);
 app.use('/api/rentals',rental);
 app.use('/api/users',user);
 app.use('/api/login',login);
+app.use(myerror);
 
 var port = process.env.PORT || 3000
 

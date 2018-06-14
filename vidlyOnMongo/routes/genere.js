@@ -22,7 +22,7 @@ router.delete('/:id',async (request,response) =>{
             return response.status(404).send('Could not find the genere, please use add service');
         response.send(result);
     }catch(err){
-        response.status(404).send(err.message);
+        response.status(500).send(err.message);
     }
 });
 
