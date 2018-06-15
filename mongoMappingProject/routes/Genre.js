@@ -10,7 +10,7 @@ const router = express.Router();
     response.send(genre);
 }));*/
 
-router.get('/', auth, async (response) => {
+router.get('/', auth, async (request,response) => {
     const genre = await Genre.find().select();
     response.send(genre);
 });
