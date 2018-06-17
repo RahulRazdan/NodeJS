@@ -1,5 +1,7 @@
 
 const lib = require('../lib');
+const db = require('../db');
+const mail = require('../mail');
 
 describe('Absolute',()=>{
 
@@ -62,4 +64,39 @@ describe('registerUser',()=>{
         expect(result).toHaveProperty('username', 'rahul');
         expect(result.id).toBeGreaterThan(0);
     })
+});
+
+describe('applyDiscount', () => {
+
+    db.getCustomerSync = function(id){
+        console.log('Fake customer reading..');
+        return { id: id, points: 11 };
+    }
+    it('should apply discount if customer has more than 10 points',()=>{
+        const order = {customerId : 1 , totalPrice:10};
+        lib.applyDiscount(order);
+        expect(order.totalPrice).toBe(9);
+    });
+});
+
+describe('notify Customer ',()=>{
+    mail.send = jest.fn();
+    it('should send mail to cusotmer if found',()=>{
+        lib.notifyCustomer({customerId : 1 , totalPrice:10});
+        expect(mail.send).toHaveBeenCalled();
+    });
+});
+
+describe('notify Customer mock objects',()=>{
+    
+    db.getCustomerSync = jest.fn().mockReturnValue({
+        email: 'a' , points : 11
+    });
+
+    mail.send = jest.fn();
+    
+    it('should send mail to cusotmer if found',()=>{
+        lib.notifyCustomer({customerId : 1 , totalPrice:10});
+        expect(mail.send).toHaveBeenCalled();
+    });
 });

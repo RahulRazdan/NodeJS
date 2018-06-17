@@ -1,8 +1,10 @@
 
 const mongo = require('mongoose');
 const winston = require('winston');
+const config = require('config');
 
 module.exports = function(){
-    mongo.connect('mongodb://localhost/playground')
-    .then(()=> winston.info('Connected to MongoDB...'));
+    const dbURL = config.get('db');
+    mongo.connect(dbURL)
+    .then(()=> winston.info(`Connected to ${dbURL}...`));
 }

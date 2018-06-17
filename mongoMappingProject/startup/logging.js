@@ -1,6 +1,6 @@
 require('express-async-errors');
 const winston = require('winston');
-require('winston-mongodb');
+//require('winston-mongodb');
 
 module.exports = function(){
     winston.handleExceptions(
@@ -15,5 +15,5 @@ module.exports = function(){
     process.on('unhandledRejection',(ex) => {
         throw ex;
     });
-    winston.add(winston.transports.MongoDB, {db : 'mongodb://localhost/playground'});
+    //winston.add(winston.transports.MongoDB, {db : 'mongodb://localhost/playground'});
 }

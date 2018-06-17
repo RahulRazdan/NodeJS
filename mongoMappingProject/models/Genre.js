@@ -16,7 +16,7 @@ const Genre = mongo.model('Genre',genreSchema);
 
 function validateGeneres(genre){
     const schema = {
-        genreId : Joi.string().required()
+        genreId : Joi.string().valid('SCI-FI','DRAMA').required()
     };
 
     return Joi.validate(genre,schema);
